@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="${titulo}">Insert title here</title>
+</head>
+<body>
+	<h1 th:text="${titulo}"></h1>
+	
+	<table>
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>N° Aula</th>
+				<th>Alias</th>
+				<th>Edificio</th>
+	      <th>Geolocalización</th>
+	      <th>Disponible</th>
+	      <th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="aula: ${aulas}">
+				<td th:text="${aula.id}"></td>
+				<td th:text="${aula.numaula}"></td>
+				<td th:text="${aula.alias}"></td>
+				<td th:text="${aula.edificio}"></td>
+				<td th:text="${aula.geolocal}"></td>
+				<td th:text="${aula.deleted}"></td>
+				<td></td>
+			</tr>
+	</tbody>
+</table>
+</body>
+</html>
