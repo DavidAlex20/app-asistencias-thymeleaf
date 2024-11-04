@@ -4,20 +4,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.um.app.models.Usuario;
+import com.um.app.models.Users;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
 
 @Controller
-@RequestMapping("/registrar")
+// @RequestMapping("/registrar")
 public class RegisterController {
-    Usuario usuario = new Usuario("", "", "", false, "USER");
+    /*
     @GetMapping
     public String getMethodName(Model model) {
         model.addAttribute("titulo", "Register");
         model.addAttribute("usuario", usuario);
         return "register";
     }
-    
+    */
 }

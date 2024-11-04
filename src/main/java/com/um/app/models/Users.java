@@ -2,25 +2,20 @@ package com.um.app.models;
 
 import org.springframework.data.annotation.Id;
 
-public class Usuario {
+public class Users {
 	@Id
 	private int id;
 	
 	private String username;
 	
-	private String email;
-	
 	private String password;
-	
-	private boolean deleted;
 
 	private String role;
 
-	public Usuario(String username, String email, String password, boolean deleted, String role) {
+	public Users(){}
+	public Users(String username, String password, String role) {
 		this.username = username;
-		this.email = email;
 		this.password = password;
-		this.deleted = deleted;
 		this.role = role;
 	}
 
@@ -40,14 +35,6 @@ public class Usuario {
 		this.username = username;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getPassword() {
 		return password;
 	}
@@ -56,14 +43,6 @@ public class Usuario {
 		this.password = password;
 	}
 
-	public boolean isDeleted() {
-		return deleted;
-	}
-
-	public void setDeleted(boolean deleted) {
-		this.deleted = deleted;
-	}
-	
 	public String getRole() {
 		return role;
 	}
@@ -71,4 +50,6 @@ public class Usuario {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	
+	
 }
