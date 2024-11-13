@@ -17,7 +17,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/materias")
 public class MateriasCrud {
 
     @Autowired
@@ -25,7 +25,7 @@ public class MateriasCrud {
 
     private static final Logger log = LoggerFactory.getLogger(MateriasCrud.class);
     
-	@GetMapping("/materias")
+	@GetMapping
 	public String materia(Model model) {
 		Flux<Materias> materias = materiasService.findAll();
 
@@ -34,7 +34,7 @@ public class MateriasCrud {
 		return "admin/materias";
 	}
 
-	@GetMapping("/materias/crear")
+	@GetMapping("/crear")
 	public String materiaCrear(Model model) {
 		Materias materia = new Materias("", 0, 0);
 
@@ -43,7 +43,7 @@ public class MateriasCrud {
 		return "admin/materias-form";
 	}
 	
-	@GetMapping("/materias/editar/{id}")
+	@GetMapping("/editar/{id}")
 	public String materiaEditar(@PathVariable int id, Model model) {
 		Mono<Materias> materia = materiasService.findById(id).doOnNext(item -> {
 			log.info("Cargando materia :: " + item.toString());
@@ -54,14 +54,14 @@ public class MateriasCrud {
 		return "admin/materias-form";
 	}
 
-	@PostMapping("/materias/guardar")
+	@PostMapping("/guardar")
 	public Mono<String> materiaGuardar(Materias materia) {
 		return materiasService.save(materia).doOnNext(item -> {
 			log.info("Materia guardada :: " + item.toString());
 		}).thenReturn("redirect:/admin/materias");
 	}
 
-	@GetMapping("/materias/eliminar/{id}")
+	@GetMapping("/eliminar/{id}")
 	public Mono<String> materiaEliminar(@PathVariable int id) {
 		return materiasService.findById(id).flatMap(item -> {
 			log.info("Eliminando materia :: " + item.toString());

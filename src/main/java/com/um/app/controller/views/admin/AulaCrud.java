@@ -17,7 +17,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/aulas")
 public class AulaCrud {
 
     @Autowired
@@ -25,16 +25,17 @@ public class AulaCrud {
 
     private static final Logger log = LoggerFactory.getLogger(AulaCrud.class);
 
-	@GetMapping("/aulas")
+	@GetMapping
 	public String aula(Model model) {
 		Flux<Aula> aulas = aulaService.findAll();
 
 		model.addAttribute("aulas", aulas);
 		model.addAttribute("titulo", "Listado de aulas");
+		log.info("Loading: Admin - Aulas");
 		return "admin/aula";
 	}
 
-	@GetMapping("/aulas/crear")
+	@GetMapping("/crear")
 	public String aulaCrear(Model model) {
 		Aula aula = new Aula();
 
@@ -43,7 +44,7 @@ public class AulaCrud {
 		return "admin/aula-form";
 	}
 	
-	@GetMapping("/aulas/editar/{id}")
+	@GetMapping("/editar/{id}")
 	public String aulaEditar(@PathVariable int id, Model model) {
 		Mono<Aula> aula = aulaService.findById(id).doOnNext(item -> {
 			log.info("Cargando aula :: " + item.toString());
@@ -54,14 +55,14 @@ public class AulaCrud {
 		return "admin/aula-form";
 	}
 
-	@PostMapping("/aulas/guardar")
+	@PostMapping("/guardar")
 	public Mono<String> aulaGuardar(Aula aula) {
 		return aulaService.save(aula).doOnNext(item -> {
 			log.info("Aula guardada :: " + item.toString());
 		}).thenReturn("redirect:/admin/aulas");
 	}
 
-	@GetMapping("/aulas/eliminar/{id}")
+	@GetMapping("/eliminar/{id}")
 	public Mono<String> aulaEliminar(@PathVariable int id) {
 		return aulaService.findById(id).flatMap(item -> {
 			log.info("Eliminando aula :: " + item.toString());

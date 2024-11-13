@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.um.app.models.Asigaula;
+import com.um.app.models.Horario;
 import com.um.app.repository.AsigaulaRepository;
 
 import reactor.core.publisher.Flux;
@@ -42,5 +43,9 @@ public class AsigaulaService {
 	
 	public Mono<Void> deleteById(int id){
 		return asigaulaRepository.deleteById(id);
+	}
+
+	public Flux<Horario> getHorarios() {
+		return asigaulaRepository.getHorario();
 	}
 }

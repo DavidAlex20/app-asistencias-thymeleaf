@@ -8,7 +8,7 @@
         <h1 th:text="${titulo}"></h1>
         <nav>
             <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Menu</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/admin}">Menu</a></li>
             <li class="breadcrumb-item active">Aulas</li>
             </ol>
         </nav>
@@ -19,32 +19,42 @@
             <div class="card-body">
                 <div class="d-flex align-items-center">
                     <h5 class="card-title" th:text="${titulo}"></h5>
-                    <a type="button" th:href="@{/admin/aulas}" class="btn btn-secondary ms-auto">Cancelar</a>
-                  </div>
+                    <a type="button" th:href="@{/admin/horario}" class="btn btn-secondary ms-auto">Cancelar</a>
+                </div>
                 <p class="m-1"></p>
                 
                 <!-- Multi Columns Form -->
-                <form class="row g-3 needs-validation" th:action="@{/admin/aulas/guardar}" method="post" th:object="${aula}" novalidate>
-                  <input th:if="${aula.id != 0}" type="hidden" th:field="*{id}">
+                <form class="row g-3 needs-validation" th:action="@{/admin/horario/guardar}" method="post" th:object="${asigaula}" novalidate>
+                  <input th:if="${asigaula.id != 0}" type="hidden" th:field="*{id}">
                     <div class="col-md-6">
-                        <label for="numaula" class="form-label"># Aula</label>
-                        <input type="number" class="form-control" th:field="*{numaula}" required>
+                        <label for="id_materias" class="form-label">Materia</label>
+                        <select th:field="*{id_materias}" id="id_materias" class="form-control">
+                            <option th:each="materia : ${materias}" th:value="${materia.id}" th:text="${materia.nombre}"></option>
+                        </select>
                     </div>
                     <div class="col-md-6">
-                        <label for="alias" class="form-label">Alias</label>
-                        <input type="text" class="form-control" th:field="*{alias}">
+                        <label for="id_aula" class="form-label">Aula</label>
+                        <select th:field="*{id_aula}" id="id_aula" class="form-control">
+                            <option th:each="aula : ${aulas}" th:value="${aula.id}" th:text="${aula.numaula}"></option>
+                        </select>
                     </div>
                     <div class="col-md-6">
-                        <label for="edificio" class="form-label">Edificio</label>
-                        <input type="text" class="form-control" th:field="*{edificio}" required>
+                        <label for="dia" class="form-label">Dia</label>
+                        <select th:field="*{dia}" id="id_aula" class="form-control">
+                            <option th:value="1" th:text="Lunes"></option>
+                            <option th:value="2" th:text="Martes"></option>
+                            <option th:value="3" th:text="Miercoles"></option>
+                            <option th:value="4" th:text="Jueves"></option>
+                            <option th:value="5" th:text="Viernes"></option>
+                        </select>
                     </div>
                     <div class="col-md-6">
-                        <label for="geolocal" class="form-label">Localización</label>
-                        <input type="text" class="form-control" th:field="*{geolocal}">
+                        <label for="inicio" class="form-label">Hora inicial</label>
+                        <input type="time" class="form-control" th:field="*{inicio}">
                     </div>
-                    <div class="col-md-6 form-check form-switch">
-                        <label for="disponible" class="form-check-label">Disponible</label>
-                        <input type="checkbox" class="form-check-input" th:field="*{disponible}" checked>
+                    <div class="col-md-6">
+                        <label for="fin" class="form-label">Hora inicial</label>
+                        <input type="time" class="form-control" th:field="*{fin}">
                     </div>
                     <div>
                         <input type="submit" class="btn btn-success" value="Guardar">

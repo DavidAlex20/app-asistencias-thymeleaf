@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.um.app.models.Asigmateria;
+import com.um.app.models.MateriasAsignadas;
 import com.um.app.repository.AsigmateriaRepository;
 
 import reactor.core.publisher.Flux;
@@ -42,5 +43,9 @@ public class AsigmateriaService {
 	
 	public Mono<Void> deleteById(int id){
 		return asigmateriaRepository.deleteById(id);
+	}
+
+	public Flux<MateriasAsignadas> getMateriasMaestro(int id_maestro) {
+		return asigmateriaRepository.getMateriasMaestro(id_maestro);
 	}
 }

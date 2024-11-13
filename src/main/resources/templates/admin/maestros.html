@@ -1,0 +1,58 @@
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+<body>
+  <main id="main" class="main" layout:fragment="body">
+
+    <div class="pagetitle">
+        <h1 th:text="${titulo}"></h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/admin}">Menu</a></li>
+            <li class="breadcrumb-item active">Maestros</li>
+          </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <h5 class="card-title" th:text="${titulo}"></h5>
+              <a type="button" th:href="@{maestros/crear}" class="btn btn-primary ms-auto">Crear</a>
+            </div>
+            <p class="m-1"></p>
+  
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">N° Empleado</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Opciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="maestro: ${maestros}">
+                    <td th:text="${maestro.id}"></td>
+                    <td th:text="${maestro.numempleado}"></td>
+                    <td th:text="${maestro.nombre + ' ' + maestro.apellido}"></td>
+                    <td th:text="${maestro.status}"></td>
+                    <td>
+                        <a type="button" th:href="@{usuario/} + ${maestro.id_users}" class="btn btn-primary"
+                        data-bs-toggle="tooltip" data-bs-placement="top" title="Usuario">
+                          <i class="bi bi-person-fill"></i>
+                        </a>
+                        <a type="button" th:href="@{maestros/asignacion/} + ${maestro.id}" class="btn btn-secondary">Materias</a>
+                        <a type="button" th:href="@{maestros/editar/} + ${maestro.id}" class="btn btn-secondary">Editar</a>
+                        <a type="button" th:href="@{maestros/eliminar/} + ${maestro.id}" onclick="return confirm('¿Desea eliminar este registro?');" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </section>
+  </main>
+</body>

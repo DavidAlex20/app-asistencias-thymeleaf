@@ -16,8 +16,8 @@ public class AdminController {
 
 	@GetMapping
 	public String index(Model model) {
-		model.addAttribute("titulo", "Admin Panel");
-		model.addAttribute("pagina", "index");
+		model.addAttribute("titulo", "Panel de administrador");
+		model.addAttribute("pagina", "admin");
 		log.info("Loading: Admin - Index");
 		return "admin/index";
 	}

@@ -1,0 +1,52 @@
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+<body>
+  <main id="main" class="main" layout:fragment="body">
+
+    <div class="pagetitle">
+        <h1 th:text="${titulo}"></h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/admin}">Menu</a></li>
+            <li class="breadcrumb-item">Maestros</li>
+            <li class="breadcrumb-item active">Materias</li>
+          </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <h5 class="card-title" th:text="${titulo}"></h5>
+              <a type="button" th:href="@{crear/} + ${id}" class="btn btn-primary ms-auto">Añadir</a>
+            </div>
+            <p class="m-1"></p>
+
+            <!-- <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Materia</th>
+                        <th scope="col">Fecha inicial</th>
+                        <th scope="col">Fecha final</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="materia: ${materias}">
+                        <td th:text="${materia.nombre}"></td>
+                        <td th:text="${materia.fecha_inicio}"></td>
+                        <td th:text="${materia.fecha_fin}"></td>
+                        <td>
+                            <a type="button" th:href="@{maestros/asignacion/editar/} + ${materia.id}" class="btn btn-secondary">Editar</a>
+                            <a type="button" th:href="@{maestros/asignacion/eliminar/} + ${materia.id}" onclick="return confirm('¿Desea eliminar este registro?');" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                  </tbody>
+            </table> -->
+          </div>
+        </div>
+    </section>
+  </main>
+</body>

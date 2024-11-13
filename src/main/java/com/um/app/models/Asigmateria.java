@@ -1,9 +1,6 @@
 package com.um.app.models;
 
-import java.sql.Date;
-
 import org.springframework.data.annotation.Id;
-import org.springframework.format.annotation.DateTimeFormat;
 
 public class Asigmateria {
 	@Id
@@ -13,14 +10,12 @@ public class Asigmateria {
 	
 	private int id_materia;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date fecha_inicio;
+	private String fecha_inicio;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date fecha_fin;
+	private String fecha_fin;
 
 	public Asigmateria(){}
-	public Asigmateria(int id_maestro, int id_materia, Date fecha_inicio, Date fecha_fin) {
+	public Asigmateria(int id_maestro, int id_materia, String fecha_inicio, String fecha_fin) {
 		this.id_maestro = id_maestro;
 		this.id_materia = id_materia;
 		this.fecha_inicio = fecha_inicio;
@@ -51,19 +46,19 @@ public class Asigmateria {
 		this.id_materia = id_materia;
 	}
 
-	public Date getFecha_inicio() {
+	public String getFecha_inicio() {
 		return fecha_inicio;
 	}
 
-	public void setFecha_inicio(Date fecha_inicio) {
+	public void setFecha_inicio(String fecha_inicio) {
 		this.fecha_inicio = fecha_inicio;
 	}
 
-	public Date getFecha_fin() {
+	public String getFecha_fin() {
 		return fecha_fin;
 	}
 
-	public void setFecha_fin(Date fecha_fin) {
+	public void setFecha_fin(String fecha_fin) {
 		this.fecha_fin = fecha_fin;
 	}
 

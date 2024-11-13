@@ -1,0 +1,64 @@
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+<body>
+  
+  <main id="main" class="main" layout:fragment="body">
+    <div class="pagetitle">
+        <h1 th:text="${titulo}"></h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/admin}">Menu</a></li>
+            <li class="breadcrumb-item active">Maestros</li>
+          </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <h5 class="card-title" th:text="${titulo}"></h5>
+                    <a type="button" th:href="@{/admin/maestros}" class="btn btn-secondary ms-auto">Cancelar</a>
+                  </div>
+                <p class="m-1"></p>
+                
+                <!-- Multi Columns Form -->
+                <form class="row g-3 needs-validation" th:action="@{/admin/maestros/guardar}" method="post" th:object="${maestros}" novalidate>
+                  <input th:if="${maestros.id != 0}" type="hidden" th:field="*{id}">
+                    <div class="col-md-6">
+                        <label for="numempleado" class="form-label">N° Empleado</label>
+                        <input type="text" class="form-control" th:field="*{numempleado}" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="status" class="form-label">Estado</label>
+                      <select th:field="*{status}" id="status" class="form-control">
+                        <option th:value="fitec" th:text="FITEC"></option>
+                        <option th:value="visitante" th:text="Visitante"></option>
+                        <option th:value="foraneo" th:text="Foráneo"></option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" th:field="*{nombre}" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="apellido" class="form-label">Apellido</label>
+                      <input type="text" class="form-control" th:field="*{apellido}" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="id_users" class="form-label">Usuario</label>
+                      <select th:field="*{id_users}" id="id_users" class="form-control">
+                          <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}"></option>
+                      </select>
+                    </div>
+                    <div>
+                        <input type="submit" class="btn btn-success" value="Guardar">
+                    </div>
+                </form><!-- End Multi Columns Form -->
+            </div>
+        </div>
+    </section>
+  </main>
+
+</body>

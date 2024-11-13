@@ -8,7 +8,7 @@
       <h1 th:text="${titulo}"></h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Menu</a></li>
+          <li class="breadcrumb-item"><a th:href="@{/admin}">Menu</a></li>
           <li class="breadcrumb-item active">Horario</li>
         </ol>
       </nav>
@@ -37,9 +37,15 @@
             <tbody>
               <tr th:each="asig: ${asigaulas}">
                   <td th:text="${asig.id}"></td>
-                  <td th:text="${asig.id_materia}"></td>
-                  <td th:text="${asig.id_aula}"></td>
-                  <td th:text="${asig.dia}"></td>
+                  <td th:text="${asig.nombre}"></td>
+                  <td th:text="${asig.numaula}"></td>
+                  <th:block th:switch="${asig.dia}">
+                    <td th:case="1">Lunes</td>
+                    <td th:case="2">Martes</td>
+                    <td th:case="3">Miercoles</td>
+                    <td th:case="4">Jueves</td>
+                    <td th:case="5">Viernes</td>
+                  </th:block>
                   <td th:text="${asig.inicio} + ' - ' + ${asig.fin}"></td>
                   <td>
                       <a type="button" th:href="@{horario/editar/} + ${asig.id}" class="btn btn-secondary">Editar</a>

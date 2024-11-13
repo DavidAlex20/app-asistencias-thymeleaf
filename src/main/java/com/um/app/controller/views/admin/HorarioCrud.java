@@ -12,66 +12,82 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.um.app.models.Asigaula;
 import com.um.app.models.Aula;
+import com.um.app.models.Horario;
+import com.um.app.models.Materias;
+import com.um.app.repository.AulaRepository;
 import com.um.app.service.AsigaulaService;
 import com.um.app.service.AulaService;
+import com.um.app.service.MateriasService;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/horario")
 public class HorarioCrud {
     @Autowired
 	AsigaulaService asigaulaService;
-
-    @Autowired
-	AulaService aulaService;
+	
+	@Autowired
+	MateriasService materiasService;
+	
+	@Autowired
+	AulaRepository aulaRepository;
 
 	private static final Logger log = LoggerFactory.getLogger(HorarioCrud.class);
 
     // CRUD HORARIO (ASIGNACION DE AULAS)
-	@GetMapping("/horario")
+	@GetMapping
 	public String horario(Model model) {
-		Flux<Asigaula> asigaulas = asigaulaService.findAll();
+		Flux<Horario> asigaulas = asigaulaService.getHorarios();
+		//Flux<Asigaula> asigaulas = asigaulaService.findAll();
 		
-
 		model.addAttribute("asigaulas", asigaulas);
 		model.addAttribute("titulo", "Listado de horarios");
+		log.info("Loading: Admin - Horario");
 		return "admin/horario";
 	}
 
-	@GetMapping("/horario/crear")
+	@GetMapping("/crear")
 	public String horarioCrear(Model model) {
-		Aula aula = new Aula();
-
-		model.addAttribute("aula", aula);
-		model.addAttribute("titulo", "Guardar aula");
+		Asigaula asigaula = new Asigaula();
+		Flux<Materias> materias = materiasService.findAll();
+		Flux<Aula> aulas = aulaRepository.findAll();
+		
+		model.addAttribute("asigaula", asigaula);
+		model.addAttribute("materias", materias);
+		model.addAttribute("aulas", aulas);
+		model.addAttribute("titulo", "Guardar horario");
 		return "admin/horario-form";
 	}
 	
-	@GetMapping("/horario/editar/{id}")
+	@GetMapping("/editar/{id}")
 	public String horarioEditar(@PathVariable int id, Model model) {
-		Mono<Aula> aula = aulaService.findById(id).doOnNext(item -> {
+		Mono<Asigaula> asigaula = asigaulaService.findById(id).doOnNext(item -> {
 			log.info("Cargando aula :: " + item.toString());
-		}).defaultIfEmpty(new Aula());
+		}).defaultIfEmpty(new Asigaula());
+		Flux<Materias> materias = materiasService.findAll();
+		Flux<Aula> aulas = aulaRepository.findAll();
 
-		model.addAttribute("aula", aula);
-		model.addAttribute("titulo", "Actualizar aula");
+		model.addAttribute("asigaula", asigaula);
+		model.addAttribute("materias", materias);
+		model.addAttribute("aulas", aulas);
+		model.addAttribute("titulo", "Actualizar horario");
 		return "admin/horario-form";
 	}
 
-	@PostMapping("/horario/guardar")
-	public Mono<String> horarioGuardar(Aula aula) {
-		return aulaService.save(aula).doOnNext(item -> {
+	@PostMapping("/guardar")
+	public Mono<String> horarioGuardar(Asigaula asigaula) {
+		return asigaulaService.save(asigaula).doOnNext(item -> {
 			log.info("Aula guardada :: " + item.toString());
 		}).thenReturn("redirect:/admin/horario");
 	}
 
-	@GetMapping("/horario/eliminar/{id}")
+	@GetMapping("/eliminar/{id}")
 	public Mono<String> horarioEliminar(@PathVariable int id) {
-		return aulaService.findById(id).flatMap(item -> {
-			log.info("Eliminando aula :: " + item.toString());
-			return aulaService.deleteById(id);
+		return asigaulaService.findById(id).flatMap(item -> {
+			log.info("Eliminando horario :: " + item.toString());
+			return asigaulaService.deleteById(id);
 		}).thenReturn("redirect:/admin/horario");
 	}
 }

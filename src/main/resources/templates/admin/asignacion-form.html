@@ -2,16 +2,16 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{layout}">
 <body>
-  
   <main id="main" class="main" layout:fragment="body">
 
     <div class="pagetitle">
         <h1 th:text="${titulo}"></h1>
         <nav>
-            <ol class="breadcrumb">
+          <ol class="breadcrumb">
             <li class="breadcrumb-item"><a th:href="@{/admin}">Menu</a></li>
+            <li class="breadcrumb-item">Maestros</li>
             <li class="breadcrumb-item active">Materias</li>
-            </ol>
+          </ol>
         </nav>
     </div><!-- End Page Title -->
   
@@ -20,24 +20,27 @@
             <div class="card-body">
                 <div class="d-flex align-items-center">
                     <h5 class="card-title" th:text="${titulo}"></h5>
-                    <a type="button" th:href="@{/admin/materias}" class="btn btn-secondary ms-auto">Cancelar</a>
+                    <a type="button" th:href="@{/admin/maestros/asignacion/} + ${asig.id_maestro}" class="btn btn-secondary ms-auto">Cancelar</a>
                   </div>
                 <p class="m-1"></p>
                 
                 <!-- Multi Columns Form -->
-                <form class="row g-3 needs-validation" th:action="@{/admin/materias/guardar}" method="post" th:object="${materia}" novalidate>
-                  <input th:if="${materia.id != 0}" type="hidden" th:field="*{id}">
+                <form class="row g-3 needs-validation" th:action="@{/admin/maestros/asignacion/guardar}" method="post" th:object="${asig}" novalidate>
+                    <input th:if="${asig.id != 0}" type="hidden" th:field="*{id}">
+                    <input  type="hidden" th:field="*{id_maestro}">
                     <div class="col-md-6">
-                        <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" th:field="*{nombre}" required>
+                        <label for="id_materia" class="form-label">Materia</label>
+                        <select th:field="*{id_materia}" id="id_materia" class="form-control">
+                            <option th:each="materia : ${materias}" th:value="${materia.id}" th:text="${materia.nombre}"></option>
+                        </select>
                     </div>
                     <div class="col-md-6">
-                        <label for="frecuencia" class="form-label">Periodos por semana</label>
-                        <input type="number" class="form-control" th:field="*{frecuencia}" required>
+                        <label for="fecha_inicio" class="form-label">Fecha inicial</label>
+                        <input type="date" class="form-control" th:field="*{fecha_inicio}">
                     </div>
                     <div class="col-md-6">
-                        <label for="semestre" class="form-label">Grupo</label>
-                        <input type="number" class="form-control" th:field="*{semestre}" required>
+                        <label for="fecha_fin" class="form-label">Fecha final</label>
+                        <input type="date" class="form-control" th:field="*{fecha_fin}" required>
                     </div>
                     <div>
                         <input type="submit" class="btn btn-success" value="Guardar">
@@ -46,8 +49,6 @@
             </div>
         </div>
     </section>
-
-
   </main><!-- End #main -->
 
 </body>

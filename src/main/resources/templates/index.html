@@ -14,6 +14,10 @@
       </nav>
     </div><!-- End Page Title -->
 
+    <div sec:authorize="hasRole('ADMIN')">
+      <p>Seccion de admin</p>
+    </div>
+
     <section class="section dashboard">
       <div class="col-xl-12">
 

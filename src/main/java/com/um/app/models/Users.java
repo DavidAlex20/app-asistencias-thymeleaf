@@ -2,6 +2,7 @@ package com.um.app.models;
 
 import org.springframework.data.annotation.Id;
 
+
 public class Users {
 	@Id
 	private int id;
