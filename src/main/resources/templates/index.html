@@ -14,8 +14,8 @@
       </nav>
     </div><!-- End Page Title -->
 
-    <div sec:authorize="hasRole('ADMIN')">
-      <p>Seccion de admin</p>
+    <div>
+      <p>Bienvenido, <span th:text="${currentUser.nombre + ' ' + currentUser.apellido}"></span>!</p>
     </div>
 
     <section class="section dashboard">

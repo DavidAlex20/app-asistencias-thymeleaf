@@ -68,6 +68,11 @@
 			<groupId>nz.net.ultraq.thymeleaf</groupId>
 			<artifactId>thymeleaf-layout-dialect</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+			<version>3.0.4.RELEASE</version>
+		</dependency>
 	<!-- SQL RELATED -->
 		<dependency>
 	    	<groupId>org.postgresql</groupId>
