@@ -9,9 +9,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class UserDetailsCustom implements UserDetails {
 
-    private Users user;
+    private UsersMaestro user;
 
-    public UserDetailsCustom(Users user) {
+    public UserDetailsCustom(UsersMaestro user) {
         this.user = user;
     }
 
@@ -28,6 +28,22 @@ public class UserDetailsCustom implements UserDetails {
     @Override
     public String getUsername() {
         return user.getUsername();
+    }
+
+    public String getNombre() {
+        return user.getNombre();
+    }
+
+    public String getApellido() {
+        return user.getApellido();
+    }
+
+    public String getNumempleado() {
+        return user.getNumempleado();
+    }
+
+    public String getStatus() {
+        return user.getStatus();
     }
     
 }

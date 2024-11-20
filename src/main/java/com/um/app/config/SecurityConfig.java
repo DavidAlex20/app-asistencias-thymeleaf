@@ -3,19 +3,21 @@ package com.um.app.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.ReactiveAuthenticationManager;
+import org.springframework.security.authentication.UserDetailsRepositoryReactiveAuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.core.userdetails.MapReactiveUserDetailsService;
+import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
 import static org.springframework.security.config.Customizer.withDefaults;
-
-import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,7 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class SecurityConfig {
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private ReactiveUserDetailsService userDetailsService;
 
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
@@ -42,27 +44,16 @@ public class SecurityConfig {
     }
     
     @Bean
-    public AuthenticationProvider authProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(new BCryptPasswordEncoder(10));
-        provider.setUserDetailsService(userDetailsService);
-        return provider;
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(10);
     }
 
     @Bean
-    public MapReactiveUserDetailsService userDetailsServiceMap() {
-        UserDetails user = User
-            .withDefaultPasswordEncoder()
-            .username("david")
-            .password("d@1234")
-            .roles("USER")
-            .build();
-        UserDetails admin = User
-            .withDefaultPasswordEncoder()
-            .username("alex")
-            .password("a@1234")
-            .roles("ADMIN")
-            .build();
-        return new MapReactiveUserDetailsService(user, admin);
+    public ReactiveAuthenticationManager reactiveAuthenticationManager() {
+        UserDetailsRepositoryReactiveAuthenticationManager auth = 
+            new UserDetailsRepositoryReactiveAuthenticationManager(userDetailsService);
+        auth.setPasswordEncoder(passwordEncoder());
+        return auth;
     }
+    
 }
