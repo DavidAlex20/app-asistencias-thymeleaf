@@ -3,8 +3,10 @@ package com.um.app.controller.views;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 
 import com.um.app.models.Users;
 import com.um.app.service.UserService;
@@ -13,9 +15,9 @@ import reactor.core.publisher.Mono;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 
-
-@RestController
+@Controller
 public class UsersController {
     @Autowired
     private UserService userService;
@@ -33,5 +35,15 @@ public class UsersController {
             }).thenReturn("redirect:/admin")
         ;
     }
+
+    @GetMapping("/login")
+    public String login(@Param("error") String error, Model model) {
+        model.addAttribute("error", error);
+        return "login";
+    }
     
+    @GetMapping("/logout")
+    public String logout() {
+        return "redirect:/login";
+    }
 }

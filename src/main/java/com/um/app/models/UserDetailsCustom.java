@@ -9,14 +9,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class UserDetailsCustom implements UserDetails {
 
-    private int id;
-    private String username;
-    private String password;
-    private String role;
-    private String numempleado;
-    private String nombre;
-    private String apellido;
-    private String status;
+    public int id;
+    public String username;
+    public String password;
+    public String role;
+    public String numempleado;
+    public String nombre;
+    public String apellido;
+    public String status;
 
 
     public UserDetailsCustom(int id, String username, String password, String role, String numempleado, String nombre, String apellido, String status) {
@@ -45,7 +45,7 @@ public class UserDetailsCustom implements UserDetails {
         return this.username;
     }
 
-    public String getEmpleado() {
+    public String getNumempleado() {
         return this.numempleado;
     }
 
@@ -64,5 +64,24 @@ public class UserDetailsCustom implements UserDetails {
     public int getId() {
         return this.id;
     }
+
+    public String getRole() {
+        return this.role;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", username='" + getUsername() + "'" +
+            ", password='" + getPassword() + "'" +
+            ", role='" + getAuthorities() + "'" +
+            ", numempleado='" + getNumempleado() + "'" +
+            ", nombre='" + getNombre() + "'" +
+            ", apellido='" + getApellido() + "'" +
+            ", status='" + getStatus() + "'" +
+            "}";
+    }
+
     
 }

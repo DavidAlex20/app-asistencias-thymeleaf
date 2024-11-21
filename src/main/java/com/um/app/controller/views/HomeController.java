@@ -15,10 +15,18 @@ public class HomeController {
 
     @GetMapping
     public String index(@AuthenticationPrincipal UserDetailsCustom user, Model model) {
+        System.out.println(user.toString());
         model.addAttribute("currentUser", user);
         model.addAttribute("titulo", "Index");
         model.addAttribute("pagina", "index");
         return "index";
+    }
+
+    @GetMapping("/calendario")
+    public String calendario(@AuthenticationPrincipal UserDetailsCustom user, Model model) {
+        model.addAttribute("currentUser", user);
+
+        return "calendario";
     }
     
 }

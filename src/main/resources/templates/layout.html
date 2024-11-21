@@ -51,13 +51,13 @@
       <li class="nav-item dropdown pe-3">
 
         <a class="nav-link collapsed nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-          <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+          <span class="d-none d-md-block dropdown-toggle ps-2" th:text="${currentUser.nombre + ' ' + #strings.substring(currentUser.apellido,0,1) + '.'}"></span>
         </a><!-- End Profile Iamge Icon -->
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
           <li class="dropdown-header">
-            <h6>Kevin Anderson</h6>
-            <span>Web Designer</span>
+            <h6 th:text="${currentUser.nombre + ' ' + currentUser.apellido}"></h6>
+            <span th:text="${currentUser.numempleado}"></span>
           </li>
           <li>
             <hr class="dropdown-divider">
@@ -112,7 +112,7 @@
       </a>
     </li><!-- End Dashboard Nav -->
 
-    <li class="nav-item">
+    <li class="nav-item" th:if="${currentUser.role=='ADMIN'}">
       <a th:class="${pagina == 'admin' ? 'nav-link' : 'nav-link collapsed'}" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-menu-button-wide"></i><span>Administrador</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>

@@ -75,10 +75,14 @@
                     </div>
 
                     <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Ingresar</button>
+                      <button class="btn btn-primary w-100" type="submit">Log in</button>
                     </div>
                   </form>
-
+                  
+                  <div th:if="${error == 'true'}" class="mt-4 alert alert-danger alert-dismissible fade show" role="alert">
+                    Datos no válidos, vuelva a introducirlos.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
                 </div>
               </div>
 

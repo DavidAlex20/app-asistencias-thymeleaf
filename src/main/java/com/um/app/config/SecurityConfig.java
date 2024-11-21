@@ -10,6 +10,9 @@ import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.security.web.server.authentication.RedirectServerAuthenticationFailureHandler;
+import org.springframework.security.web.server.authentication.RedirectServerAuthenticationSuccessHandler;
+import org.springframework.security.web.server.authentication.logout.RedirectServerLogoutSuccessHandler;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -27,12 +30,21 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeExchange(exchange -> exchange
+                .pathMatchers("/css/**", "/js/**", "/images/**", "/webjars/**", "/assets/**").permitAll()
                 .pathMatchers("/login").permitAll()
-                .pathMatchers("/admin/**").hasRole("ADMIN")
+                .pathMatchers("/admin/**").hasAnyAuthority("ADMIN")
                 .anyExchange().authenticated()
                 )
             .httpBasic(withDefaults())
-            .formLogin(withDefaults())
+            .formLogin(login -> login
+                .loginPage("/login")
+                .authenticationSuccessHandler(new RedirectServerAuthenticationSuccessHandler("/"))
+                .authenticationFailureHandler(new RedirectServerAuthenticationFailureHandler("/login?error=true"))
+                )
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessHandler(new RedirectServerLogoutSuccessHandler())
+                )
         ;
         return http.build();
     }

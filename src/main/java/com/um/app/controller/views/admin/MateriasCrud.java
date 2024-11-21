@@ -3,6 +3,7 @@ package com.um.app.controller.views.admin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.um.app.models.Materias;
+import com.um.app.models.UserDetailsCustom;
 import com.um.app.service.MateriasService;
 
 import reactor.core.publisher.Flux;
@@ -26,29 +28,32 @@ public class MateriasCrud {
     private static final Logger log = LoggerFactory.getLogger(MateriasCrud.class);
     
 	@GetMapping
-	public String materia(Model model) {
+	public String materia(@AuthenticationPrincipal UserDetailsCustom user, Model model) {
 		Flux<Materias> materias = materiasService.findAll();
 
+		model.addAttribute("currentUser", user);
 		model.addAttribute("materias", materias);
 		model.addAttribute("titulo", "Listado de materias");
 		return "admin/materias";
 	}
 
 	@GetMapping("/crear")
-	public String materiaCrear(Model model) {
+	public String materiaCrear(@AuthenticationPrincipal UserDetailsCustom user, Model model) {
 		Materias materia = new Materias("", 0, 0);
 
+		model.addAttribute("currentUser", user);
 		model.addAttribute("materia", materia);
 		model.addAttribute("titulo", "Guardar materia");
 		return "admin/materias-form";
 	}
 	
 	@GetMapping("/editar/{id}")
-	public String materiaEditar(@PathVariable int id, Model model) {
+	public String materiaEditar(@AuthenticationPrincipal UserDetailsCustom user, @PathVariable int id, Model model) {
 		Mono<Materias> materia = materiasService.findById(id).doOnNext(item -> {
 			log.info("Cargando materia :: " + item.toString());
 		}).defaultIfEmpty(new Materias("", 0, 0));
 
+		model.addAttribute("currentUser", user);
 		model.addAttribute("materia", materia);
 		model.addAttribute("titulo", "Actualizar materia");
 		return "admin/materias-form";

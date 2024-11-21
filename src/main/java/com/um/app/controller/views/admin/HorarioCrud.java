@@ -3,6 +3,7 @@ package com.um.app.controller.views.admin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import com.um.app.models.Asigaula;
 import com.um.app.models.Aula;
 import com.um.app.models.Horario;
 import com.um.app.models.Materias;
+import com.um.app.models.UserDetailsCustom;
 import com.um.app.repository.AulaRepository;
 import com.um.app.service.AsigaulaService;
 import com.um.app.service.AulaService;
@@ -38,10 +40,11 @@ public class HorarioCrud {
 
     // CRUD HORARIO (ASIGNACION DE AULAS)
 	@GetMapping
-	public String horario(Model model) {
+	public String horario(@AuthenticationPrincipal UserDetailsCustom user, Model model) {
 		Flux<Horario> asigaulas = asigaulaService.getHorarios();
 		//Flux<Asigaula> asigaulas = asigaulaService.findAll();
 		
+		model.addAttribute("currentUser", user);
 		model.addAttribute("asigaulas", asigaulas);
 		model.addAttribute("titulo", "Listado de horarios");
 		log.info("Loading: Admin - Horario");
@@ -49,11 +52,12 @@ public class HorarioCrud {
 	}
 
 	@GetMapping("/crear")
-	public String horarioCrear(Model model) {
+	public String horarioCrear(@AuthenticationPrincipal UserDetailsCustom user, Model model) {
 		Asigaula asigaula = new Asigaula();
 		Flux<Materias> materias = materiasService.findAll();
 		Flux<Aula> aulas = aulaRepository.findAll();
 		
+		model.addAttribute("currentUser", user);
 		model.addAttribute("asigaula", asigaula);
 		model.addAttribute("materias", materias);
 		model.addAttribute("aulas", aulas);
@@ -62,13 +66,14 @@ public class HorarioCrud {
 	}
 	
 	@GetMapping("/editar/{id}")
-	public String horarioEditar(@PathVariable int id, Model model) {
+	public String horarioEditar(@AuthenticationPrincipal UserDetailsCustom user, @PathVariable int id, Model model) {
 		Mono<Asigaula> asigaula = asigaulaService.findById(id).doOnNext(item -> {
 			log.info("Cargando aula :: " + item.toString());
 		}).defaultIfEmpty(new Asigaula());
 		Flux<Materias> materias = materiasService.findAll();
 		Flux<Aula> aulas = aulaRepository.findAll();
 
+		model.addAttribute("currentUser", user);
 		model.addAttribute("asigaula", asigaula);
 		model.addAttribute("materias", materias);
 		model.addAttribute("aulas", aulas);

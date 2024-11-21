@@ -3,6 +3,7 @@ package com.um.app.controller.views.admin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import com.um.app.models.Asigmateria;
 import com.um.app.models.Maestros;
 import com.um.app.models.Materias;
 import com.um.app.models.MateriasAsignadas;
+import com.um.app.models.UserDetailsCustom;
 import com.um.app.models.Users;
 import com.um.app.service.AsigmateriaService;
 import com.um.app.service.MaestrosService;
@@ -34,19 +36,21 @@ public class MaestrosCrud {
     private static final Logger log = LoggerFactory.getLogger(MaestrosCrud.class);
 
     @GetMapping
-    public String maestros(Model model) {
+    public String maestros(@AuthenticationPrincipal UserDetailsCustom user, Model model) {
         Flux<Maestros> maestros = maestrosService.findAll();
 
+        model.addAttribute("currentUser", user);
         model.addAttribute("maestros", maestros);
         model.addAttribute("titulo", "Listado de maestros");
         return "admin/maestros";
     }
 
     @GetMapping("/crear")
-    public String maestrosCrear(Model model) {
+    public String maestrosCrear(@AuthenticationPrincipal UserDetailsCustom user, Model model) {
         Maestros maestro = new Maestros("", "", "", "", 0);
         Flux<Users> users = userService.findAll();
 
+        model.addAttribute("currentUser", user);
         model.addAttribute("maestros", maestro);
         model.addAttribute("users", users);
         model.addAttribute("titulo", "Guardar maestro");
@@ -54,12 +58,13 @@ public class MaestrosCrud {
     }
 
     @GetMapping("/editar/{id}")
-    public String maestrosEditar(@PathVariable int id, Model model) {
+    public String maestrosEditar(@AuthenticationPrincipal UserDetailsCustom user, @PathVariable int id, Model model) {
         Mono<Maestros> maestro = maestrosService.findById(id).doOnNext(item -> {
             log.info("Cargando maestro :: " + item.toString());
         }).defaultIfEmpty(new Maestros("", "", "", "", 0));
         Flux<Users> users = userService.findAll();
 
+        model.addAttribute("currentUser", user);
         model.addAttribute("maestros", maestro);
         model.addAttribute("users", users);
         model.addAttribute("titulo", "Actualizar maestro");
