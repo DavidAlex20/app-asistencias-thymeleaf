@@ -5,8 +5,8 @@ import org.springframework.data.r2dbc.repository.R2dbcRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.um.app.models.Users;
 import com.um.app.models.UsersMaestro;
+import com.um.app.models.database.Users;
 
 import reactor.core.publisher.Mono;
 
@@ -15,7 +15,7 @@ public interface UserRepository extends R2dbcRepository<Users, Integer>{
     Mono<Users> findByUsername(String username);
 
     @Query(
-        "SELECT us.id, us.username, us.password, us.role, mae.numempleado, mae.nombre, mae.apellido, mae.status "+
+        "SELECT us.id, us.username, us.password, us.role, mae.id AS id_maestro, mae.numempleado, mae.nombre, mae.apellido, mae.status "+
 	    "FROM users AS us INNER JOIN maestros AS mae "+
 	    "ON us.id = mae.id_users "+
 	    "WHERE us.username = :username "+

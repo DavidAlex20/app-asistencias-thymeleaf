@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.um.app.models.Asigmateria;
+import com.um.app.models.database.Asigmateria;
 import com.um.app.service.AsigmateriaService;
 
 import reactor.core.publisher.Flux;

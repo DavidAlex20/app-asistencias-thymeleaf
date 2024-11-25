@@ -9,21 +9,23 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class UserDetailsCustom implements UserDetails {
 
-    public int id;
-    public String username;
-    public String password;
-    public String role;
-    public String numempleado;
-    public String nombre;
-    public String apellido;
-    public String status;
+    private int id;
+    private String username;
+    private String password;
+    private String role;
+    private int id_maestro;
+    private String numempleado;
+    private String nombre;
+    private String apellido;
+    private String status;
 
 
-    public UserDetailsCustom(int id, String username, String password, String role, String numempleado, String nombre, String apellido, String status) {
+    public UserDetailsCustom(int id, String username, String password, String role, int id_maestro, String numempleado, String nombre, String apellido, String status) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
+        this.id_maestro = id_maestro;
         this.numempleado = numempleado;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -69,13 +71,22 @@ public class UserDetailsCustom implements UserDetails {
         return this.role;
     }
 
+    public int getId_maestro() {
+        return this.id_maestro;
+    }
+
+    public void setId_maestro(int id_maestro) {
+        this.id_maestro = id_maestro;
+    }
+
     @Override
     public String toString() {
         return "{" +
             " id='" + getId() + "'" +
             ", username='" + getUsername() + "'" +
             ", password='" + getPassword() + "'" +
-            ", role='" + getAuthorities() + "'" +
+            ", role='" + getRole() + "'" +
+            ", id_maestro='" + getId_maestro() + "'" +
             ", numempleado='" + getNumempleado() + "'" +
             ", nombre='" + getNombre() + "'" +
             ", apellido='" + getApellido() + "'" +

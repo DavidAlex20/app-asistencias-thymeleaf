@@ -26,6 +26,7 @@ public class UserDetailsCustomService implements ReactiveUserDetailsService {
                 user.getUsername(),
                 user.getPassword(),
                 user.getRole(),
+                user.getId_maestro(),
                 user.getNumempleado(),
                 user.getNombre(),
                 user.getApellido(),

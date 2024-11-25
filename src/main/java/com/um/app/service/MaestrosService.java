@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.um.app.models.Maestros;
+import com.um.app.models.database.Maestros;
 import com.um.app.repository.MaestrosRepository;
 
 import reactor.core.publisher.Flux;

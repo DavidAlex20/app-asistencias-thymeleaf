@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.um.app.models.Aula;
+import com.um.app.models.database.Aula;
 import com.um.app.repository.AulaRepository;
 
 import reactor.core.publisher.Flux;

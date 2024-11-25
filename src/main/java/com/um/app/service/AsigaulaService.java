@@ -5,8 +5,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.um.app.models.Asigaula;
-import com.um.app.models.Horario;
+import com.um.app.models.database.Asigaula;
+import com.um.app.models.dto.Calendario;
+import com.um.app.models.dto.Horario;
 import com.um.app.repository.AsigaulaRepository;
 
 import reactor.core.publisher.Flux;
@@ -47,5 +48,9 @@ public class AsigaulaService {
 
 	public Flux<Horario> getHorarios() {
 		return asigaulaRepository.getHorario();
+	}
+
+	public Flux<Calendario> getCalendario(int id) {
+		return asigaulaRepository.calendarioDto(id);
 	}
 }

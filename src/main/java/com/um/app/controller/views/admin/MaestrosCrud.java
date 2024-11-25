@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.um.app.models.Asigmateria;
-import com.um.app.models.Maestros;
-import com.um.app.models.Materias;
-import com.um.app.models.MateriasAsignadas;
 import com.um.app.models.UserDetailsCustom;
-import com.um.app.models.Users;
+import com.um.app.models.database.Asigmateria;
+import com.um.app.models.database.Maestros;
+import com.um.app.models.database.Materias;
+import com.um.app.models.database.Users;
+import com.um.app.models.dto.MateriasAsignadas;
 import com.um.app.service.AsigmateriaService;
 import com.um.app.service.MaestrosService;
 import com.um.app.service.MateriasService;

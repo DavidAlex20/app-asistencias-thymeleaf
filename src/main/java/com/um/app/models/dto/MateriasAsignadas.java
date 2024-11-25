@@ -1,4 +1,4 @@
-package com.um.app.models;
+package com.um.app.models.dto;
 
 import org.springframework.data.annotation.Id;
 

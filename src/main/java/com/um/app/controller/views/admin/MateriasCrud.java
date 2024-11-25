@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.um.app.models.Materias;
 import com.um.app.models.UserDetailsCustom;
+import com.um.app.models.database.Materias;
 import com.um.app.service.MateriasService;
 
 import reactor.core.publisher.Flux;

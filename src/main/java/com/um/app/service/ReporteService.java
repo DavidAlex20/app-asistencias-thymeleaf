@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.um.app.models.Reporte;
+import com.um.app.models.database.Reporte;
 import com.um.app.repository.ReporteRepository;
 
 import reactor.core.publisher.Flux;

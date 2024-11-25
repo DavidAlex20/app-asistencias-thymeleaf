@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.um.app.models.Aula;
 import com.um.app.models.UserDetailsCustom;
+import com.um.app.models.database.Aula;
 import com.um.app.service.AulaService;
 
 import reactor.core.publisher.Flux;

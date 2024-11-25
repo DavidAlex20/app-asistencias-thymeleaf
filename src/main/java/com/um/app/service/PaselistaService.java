@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.um.app.models.Paselista;
+import com.um.app.models.database.Paselista;
 import com.um.app.repository.PaselistaRepository;
 
 import reactor.core.publisher.Flux;

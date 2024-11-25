@@ -8,17 +8,19 @@ public class UsersMaestro {
     private String username;
     private String password;
     private String role;
+    private int id_maestro;
     private String numempleado;
     private String nombre;
     private String apellido;
     private String status;
 
     public UsersMaestro() {}
-    public UsersMaestro(int id, String username, String password, String role, String numempleado, String nombre, String apellido, String status) {
+    public UsersMaestro(int id, String username, String password, String role, int id_maestro, String numempleado, String nombre, String apellido, String status) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
+        this.id_maestro = id_maestro;
         this.numempleado = numempleado;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -55,6 +57,14 @@ public class UsersMaestro {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public int getId_maestro() {
+        return this.id_maestro;
+    }
+
+    public void setId_maestro(int id_maestro) {
+        this.id_maestro = id_maestro;
     }
 
     public String getNumempleado() {
@@ -96,6 +106,7 @@ public class UsersMaestro {
             ", username='" + getUsername() + "'" +
             ", password='" + getPassword() + "'" +
             ", role='" + getRole() + "'" +
+            ", id_maestro='" + getId_maestro() + "'" +
             ", numempleado='" + getNumempleado() + "'" +
             ", nombre='" + getNombre() + "'" +
             ", apellido='" + getApellido() + "'" +

@@ -1,9 +1,7 @@
-package com.um.app.models;
+package com.um.app.models.database;
 
-import java.sql.Date;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.format.annotation.DateTimeFormat;
 
 public class Reporte {
 	@Id
@@ -11,11 +9,9 @@ public class Reporte {
 	
 	private int id_maestro;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date semana_inicio;
-	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date semana_fin;
+	private String semana_inicio;
+
+	private String semana_fin;
 	
 	private int horas_puntuales;
 	
@@ -24,7 +20,7 @@ public class Reporte {
 	private int inasistencias;
 
 	public Reporte(){}
-	public Reporte(int id_maestro, Date semana_inicio, Date semana_fin, int horas_puntuales, int horas_impuntuales,
+	public Reporte(int id_maestro, String semana_inicio, String semana_fin, int horas_puntuales, int horas_impuntuales,
 			int inasistencias) {
 		this.id_maestro = id_maestro;
 		this.semana_inicio = semana_inicio;
@@ -50,19 +46,19 @@ public class Reporte {
 		this.id_maestro = id_maestro;
 	}
 
-	public Date getSemana_inicio() {
+	public String getSemana_inicio() {
 		return semana_inicio;
 	}
 
-	public void setSemana_inicio(Date semana_inicio) {
+	public void setSemana_inicio(String semana_inicio) {
 		this.semana_inicio = semana_inicio;
 	}
 
-	public Date getSemana_fin() {
+	public String getSemana_fin() {
 		return semana_fin;
 	}
 
-	public void setSemana_fin(Date semana_fin) {
+	public void setSemana_fin(String semana_fin) {
 		this.semana_fin = semana_fin;
 	}
 

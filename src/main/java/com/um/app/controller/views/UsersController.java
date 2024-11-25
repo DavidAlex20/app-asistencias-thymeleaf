@@ -8,7 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
-import com.um.app.models.Users;
+import com.um.app.models.database.Users;
 import com.um.app.service.UserService;
 
 import reactor.core.publisher.Mono;

@@ -3,7 +3,7 @@ package com.um.app.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.um.app.models.Users;
+import com.um.app.models.database.Users;
 import com.um.app.repository.UserRepository;
 
 import reactor.core.publisher.Flux;

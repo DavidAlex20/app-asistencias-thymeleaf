@@ -113,10 +113,10 @@
     </li><!-- End Dashboard Nav -->
 
     <li class="nav-item" th:if="${currentUser.role=='ADMIN'}">
-      <a th:class="${pagina == 'admin' ? 'nav-link' : 'nav-link collapsed'}" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+      <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-menu-button-wide"></i><span>Administrador</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
-      <ul id="components-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+      <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <li>
           <a th:href="@{/admin/reportes}">
             <i class="bi bi-circle"></i><span>Reportes</span>
@@ -151,14 +151,14 @@
     </li>
 
     <li class="nav-item">
-      <a th:class="${pagina == 'calendario' ? 'nav-link' : 'nav-link collapsed'}" href="calendario.html">
+      <a th:class="${pagina == 'calendario' ? 'nav-link' : 'nav-link collapsed'}" th:href="@{/calendario}">
         <i class="bi bi-calendar-week"></i>
         <span>Calendario</span>
       </a>
     </li>
 
     <li class="nav-item">
-      <a th:class="${pagina == 'reporte' ? 'nav-link' : 'nav-link collapsed'}" href="reporte.html">
+      <a th:class="${pagina == 'reporte' ? 'nav-link' : 'nav-link collapsed'}" th:href="@{/reportes}">
         <i class="bi bi-clipboard-check"></i>
         <span>Reporte</span>
       </a>

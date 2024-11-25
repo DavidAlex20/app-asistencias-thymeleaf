@@ -1,4 +1,4 @@
-package com.um.app.models;
+package com.um.app.models.dto;
 
 public class Horario {
     private int id, numaula, dia;

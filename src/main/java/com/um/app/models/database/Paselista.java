@@ -1,25 +1,23 @@
-package com.um.app.models;
+package com.um.app.models.database;
 
 import org.springframework.data.annotation.Id;
 
 public class Paselista {
 	@Id
 	private int id;
-	
-	private String hora_entrada;
-	
-	private String hora_salida;
-	
 	private int id_asigmateria;
-	
 	private String geolocal;
+	private String hora_entrada;
+	private String hora_salida;
+	private String fecha;
 
 	public Paselista(){}
-	public Paselista(String hora_entrada, String hora_salida, int id_asigmateria, String geolocal) {
-		this.hora_entrada = hora_entrada;
-		this.hora_salida = hora_salida;
+	public Paselista(int id_asigmateria, String geolocal, String hora_entrada, String hora_salida, String fecha) {
 		this.id_asigmateria = id_asigmateria;
 		this.geolocal = geolocal;
+		this.hora_entrada = hora_entrada;
+		this.hora_salida = hora_salida;
+		this.fecha = fecha;
 	}
 
 	public int getId() {
@@ -60,6 +58,14 @@ public class Paselista {
 
 	public void setGeolocal(String geolocal) {
 		this.geolocal = geolocal;
+	}
+
+	public String getFecha(){
+		return this.fecha;
+	}
+
+	public void setFecha(String fecha) {
+
 	}
 	
 	@Override
