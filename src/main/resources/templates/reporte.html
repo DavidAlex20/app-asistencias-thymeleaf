@@ -30,15 +30,19 @@
                         <th scope="col">Materia</th>
                         <th scope="col">Hora de entrada</th>
                         <th scope="col">Hora de salida</th>
+                        <th scope="col">Asistencia</th>
                         <th scope="col">Fecha</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    <tr th:each="lista : ${paselista}">
-                        <td th:text="${lista.id}"></td>
-                        <td th:text="${lista.hora_entrada}"></td>
-                        <td th:text="${lista.hora_salida}"></td>
+                    <tr th:each="lista : ${paselistaData}">
+                        <td th:text="${lista.nombre}"></td>
+                        <td th:text="${lista.entrada}"></td>
+                        <td th:text="${lista.salida}"></td>
+                        <td>
+                            <button th:class="${lista.falta ? 'btn btn-danger' : 'btn btn-success'}" th:text="${lista.falta ? 'No asistido' : 'Asistido'}"></button>
+                        </td>
                         <td th:text="${lista.fecha}"></td>
                     </tr>
                     

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.um.app.models.database.Paselista;
+import com.um.app.models.dto.PaselistaData;
 import com.um.app.repository.PaselistaRepository;
 
 import reactor.core.publisher.Flux;
@@ -42,5 +43,13 @@ public class PaselistaService {
 	
 	public Mono<Void> deleteById(int id){
 		return paselistaRepository.deleteById(id);
+	}
+
+	public Flux<PaselistaData> getPaselista(int id) {
+		return paselistaRepository.paselistaDto(id);
+	}
+
+	public Flux<Paselista> getPaselistaHoy(int id, String date) {
+		return paselistaRepository.paselistaHoy(id, date);
 	}
 }

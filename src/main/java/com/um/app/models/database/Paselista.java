@@ -65,7 +65,7 @@ public class Paselista {
 	}
 
 	public void setFecha(String fecha) {
-
+		this.fecha = fecha;
 	}
 	
 	@Override

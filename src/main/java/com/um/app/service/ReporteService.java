@@ -43,4 +43,8 @@ public class ReporteService {
 	public Mono<Void> deleteById(int id){
 		return reporteRepository.deleteById(id);
 	}
+
+	public Flux<Reporte> getReportes(int id) {
+		return reporteRepository.getReportes(id);
+	}
 }

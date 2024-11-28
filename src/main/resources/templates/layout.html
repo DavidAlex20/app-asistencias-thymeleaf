@@ -37,9 +37,23 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    // Function to update the clock every second
+    function startClock() {
+        function updateClock() {
+            const now = new Date();
+            const formattedTime = now.toLocaleTimeString(); // Format: HH:mm:ss
+            document.getElementById('realTimeClock').textContent = formattedTime;
+        }
+        updateClock(); // Update immediately
+        setInterval(updateClock, 1000); // Update every second
+    }
+  </script>
 </head>
 
-<body>
+<body onload="startClock()">
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 

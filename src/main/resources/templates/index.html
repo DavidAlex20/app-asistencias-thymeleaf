@@ -15,7 +15,7 @@
     </div><!-- End Page Title -->
 
     <div>
-      <p>Bienvenido, <span th:text="${currentUser.nombre + ' ' + currentUser.apellido}"></span>!</p>
+      <p>Current time: <span id="realTimeClock"></span></p>
     </div>
 
     <section class="section dashboard">
@@ -25,7 +25,7 @@
         <div class="card info-card">
           <div class="card-body">
 
-            <h5 class="card-title">Clase actual <br><span>De 14:00 a 15:50 | Dos periodos</span></h5>
+            <h5 class="card-title">Clase siguiente <br><span>De 14:00 a 15:50 | Dos periodos</span></h5>
 
             <div class="d-flex align-items-center">
               <div class="card-icon rounded-circle d-flex align-items-center justify-content-center" 
@@ -57,39 +57,15 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr>
-                      <td>Asamblea</td>
-                      <td>13:00</td>
+                  <tr th:each="tarea : ${calendario}">
+                      <td th:text="${tarea.materia_nombre}"></td>
+                      <td th:text="${tarea.inicio}"></td>
                       <td>
-                          <button class="btn btn-success">Terminada</button>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>Introduccion a la programacion</td>
-                      <td>14:00</td>
-                      <td>
-                          <button class="btn btn-warning">En curso</button>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>Matematicas discretas</td>
-                      <td>16:00</td>
-                      <td>
-                          <button class="btn btn-secondary">Esperando</button>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>Fundamentos de ingenieria</td>
-                      <td>17:00</td>
-                      <td>
-                          <button class="btn btn-secondary">Esperando</button>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td>Diseño web</td>
-                      <td>18:00</td>
-                      <td>
-                          <button class="btn btn-secondary">Esperando</button>
+                          <a th:class="${tarea.started ? (tarea.finished ? 'btn btn-success' : 'btn btn-warning') : 'btn btn-primary'}" 
+                            th:href="@{listar/} + ${tarea.id}"
+                            th:text="${tarea.started ? (tarea.finished ? 'Completado' : 'Terminar') : 'Empezar'}"
+                            th:disabled="${tarea.finished}"
+                            ></a>
                       </td>
                   </tr>
               </tbody>
