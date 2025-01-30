@@ -13,11 +13,14 @@ public class Users {
 
 	private String role;
 
+	private boolean activo;
+
 	public Users(){}
-	public Users(String username, String password, String role) {
+	public Users(String username, String password, String role, boolean activo) {
 		this.username = username;
 		this.password = password;
 		this.role = role;
+		this.activo = activo;
 	}
 
 	public int getId() {
@@ -52,5 +55,12 @@ public class Users {
 		this.role = role;
 	}
 	
+	public boolean getActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
 	
 }

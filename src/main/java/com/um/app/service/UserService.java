@@ -19,6 +19,10 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public Mono<Users> findById(int id) {
+        return userRepository.findById(id);
+    }
+
     public Mono<Users> register(Users user) {
         return userRepository.save(user);
     }
@@ -26,5 +30,4 @@ public class UserService {
     public Mono<Users> save(Users user) {
         return userRepository.save(user);
     }
-
 }

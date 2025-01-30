@@ -10,14 +10,16 @@ public class Paselista {
 	private String hora_entrada;
 	private String hora_salida;
 	private String fecha;
+	private boolean falta;
 
 	public Paselista(){}
-	public Paselista(int id_asigmateria, String geolocal, String hora_entrada, String hora_salida, String fecha) {
+	public Paselista(int id_asigmateria, String geolocal, String hora_entrada, String hora_salida, String fecha, boolean falta) {
 		this.id_asigmateria = id_asigmateria;
 		this.geolocal = geolocal;
 		this.hora_entrada = hora_entrada;
 		this.hora_salida = hora_salida;
 		this.fecha = fecha;
+		this.falta = falta;
 	}
 
 	public int getId() {
@@ -67,11 +69,21 @@ public class Paselista {
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-	
+
+	public boolean getFalta(){
+		return this.falta;
+	}
+
+	public void setFalta(boolean falta) {
+		this.falta = falta;
+	}
 	@Override
 	public String toString() {
-		return "Paselista [id=" + id + ", hora_entrada=" + hora_entrada + ", hora_salida=" + hora_salida
-				+ ", id_asigmateria=" + id_asigmateria + ", geolocal=" + geolocal + "]";
+		return "Paselista [id=" + id + ", id_asigmateria=" + id_asigmateria + ", geolocal=" + geolocal
+				+ ", hora_entrada=" + hora_entrada + ", hora_salida=" + hora_salida + ", fecha=" + fecha + ", falta="
+				+ falta + "]";
 	}
+	
+	
 	
 }

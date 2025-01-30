@@ -32,7 +32,7 @@ public class UsersController {
         return userService.save(user)
             .doOnNext(item -> {
                 log.info("Usuario registrado :: " + item.toString());
-            }).thenReturn("redirect:/admin")
+            }).thenReturn("redirect:/admin/usuarios")
         ;
     }
 

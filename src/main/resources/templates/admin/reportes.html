@@ -9,7 +9,7 @@
         <nav>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a th:href="@{/}">Menu</a></li>
-            <li class="breadcrumb-item active">Maestros</li>
+            <li class="breadcrumb-item active">Reportes</li>
           </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -19,7 +19,7 @@
           <div class="card-body">
             <div class="d-flex align-items-center">
               <h5 class="card-title" th:text="${titulo}"></h5>
-              <a type="button" th:href="@{maestros/crear}" class="btn btn-primary ms-auto">Crear</a>
+              <a type="button" th:href="@{reportes/crear}" class="btn btn-primary ms-auto">Crear</a>
             </div>
             <p class="m-1"></p>
   
@@ -29,24 +29,25 @@
                     <th scope="col">#</th>
                     <th scope="col">N° Empleado</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Estado</th>
+                    <th scope="col">Semana (inicio/fin)</th>
+                    <th scope="col">Horas puntuales</th>
+                    <th scope="col">Horas impuntuales</th>
+                    <th scope="col">Inasistencias</th>
                     <th scope="col">Opciones</th>
                 </tr>
               </thead>
               <tbody>
-                <tr th:each="maestro: ${maestros}">
-                    <td th:text="${maestro.id}"></td>
-                    <td th:text="${maestro.numempleado}"></td>
-                    <td th:text="${maestro.nombre + ' ' + maestro.apellido}"></td>
-                    <td th:text="${maestro.status}"></td>
+                <tr th:each="reporte: ${reportes}">
+                    <td th:text="${reporte.id}"></td>
+                    <td th:text="${reporte.numempleado}"></td>
+                    <td th:text="${reporte.nombre + ' ' + reporte.apellido}"></td>
+                    <td th:text="${reporte.iniciosemana + ' / ' + reporte.finsemana}"></td>
+                    <td th:text="${reporte.horaspuntuales}"></td>
+                    <td th:text="${reporte.horasimpuntuales}"></td>
+                    <td th:text="${reporte.inasistencias}"></td>
                     <td>
-                        <a type="button" th:href="@{usuario/} + ${maestro.id_users}" class="btn btn-primary"
-                        data-bs-toggle="tooltip" data-bs-placement="top" title="Usuario">
-                          <i class="bi bi-person-fill"></i>
-                        </a>
-                        <a type="button" th:href="@{maestros/asignacion/} + ${maestro.id}" class="btn btn-secondary">Materias</a>
-                        <a type="button" th:href="@{maestros/editar/} + ${maestro.id}" class="btn btn-secondary">Editar</a>
-                        <a type="button" th:href="@{maestros/eliminar/} + ${maestro.id}" onclick="return confirm('¿Desea eliminar este registro?');" class="btn btn-danger">Eliminar</a>
+                        <a type="button" th:href="@{reportes/editar/} + ${reporte.id}" class="btn btn-secondary">Editar</a>
+                        <a type="button" th:href="@{reportes/eliminar/} + ${reporte.id}" onclick="return confirm('¿Desea eliminar este registro?');" class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>
               </tbody>

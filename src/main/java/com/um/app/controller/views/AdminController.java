@@ -19,7 +19,7 @@ public class AdminController {
 		model.addAttribute("currentUser", user);
 		model.addAttribute("titulo", "Panel de administrador");
 		model.addAttribute("pagina", "admin");
-		return "admin/index";
+		return "redirect:/";
 	}
 	
 }

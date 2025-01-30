@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.um.app.models.database.Reporte;
+import com.um.app.models.dto.DetailedReportes;
 import com.um.app.repository.ReporteRepository;
 
 import reactor.core.publisher.Flux;
@@ -46,5 +47,9 @@ public class ReporteService {
 
 	public Flux<Reporte> getReportes(int id) {
 		return reporteRepository.getReportes(id);
+	}
+
+	public Flux<DetailedReportes> getAllDetailedReportes() {
+		return reporteRepository.getAllDetailedReportes();
 	}
 }

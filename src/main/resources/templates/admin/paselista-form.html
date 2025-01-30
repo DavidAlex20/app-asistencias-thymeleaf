@@ -1,0 +1,68 @@
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+<body>
+  
+  <main id="main" class="main" layout:fragment="body">
+    <div class="pagetitle">
+        <h1 th:text="${titulo}"></h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/}">Menu</a></li>
+            <li class="breadcrumb-item active">Pase de lista</li>
+          </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <h5 class="card-title" th:text="${titulo}"></h5>
+                    <a type="button" th:href="@{/admin/paselista}" class="btn btn-secondary ms-auto">Cancelar</a>
+                  </div>
+                <p class="m-1"></p>
+                
+                <!-- Multi Columns Form -->
+                <form class="row g-3 needs-validation" th:action="@{/admin/paselista/guardar}" method="post" th:object="${pase}" novalidate>
+                  <input th:if="${pase.id != 0}" type="hidden" th:field="*{id}">
+                    <div class="col-md-6">
+                        <label for="id_asigmateria" class="form-label">Asignación de materia (materia/maestro)</label>
+                        <select th:field="*{id_asigmateria}" id="id_asigmateria" class="form-control">
+                            <option th:each="asig : ${asigmaterias}" th:value="${asig.id}" th:text="${asig.id_materia + ' - ' + asig.id_maestro}"></option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="geolocal" class="form-label">Geolocalización</label>
+                      <input type="text" class="form-control" id="geolocal" th:field="*{geolocal}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="hora_entrada" class="form-label">Hora de entrada</label>
+                        <input type="time" class="form-control" id="hora_entrada" th:field="*{hora_entrada}" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="hora_salida" class="form-label">Hora de salida</label>
+                      <input type="time" class="form-control" id="hora_salida" th:field="*{hora_salida}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="fecha" class="form-label">Fecha</label>
+                        <input type="date" class="form-control" id="fecha" th:field="*{fecha}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="falta" class="form-label">Falta</label>
+                        <select th:field="*{falta}" id="falta" class="form-control">
+                            <option th:value="false" th:text="Asistido"></option>
+                            <option th:value="true" th:text="Falta"></option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <input type="submit" class="btn btn-success" value="Guardar">
+                    </div>
+                </form><!-- End Multi Columns Form -->
+            </div>
+        </div>
+    </section>
+  </main>
+
+</body>
